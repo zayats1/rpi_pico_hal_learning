@@ -1,0 +1,12 @@
+/home/bogdandev/IdeaProjects/rpi_pico_hal_learning/target/thumbv6m-none-eabi/debug/deps/fugit-e20a17597b89fbfe.rmeta: /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/lib.rs /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/aliases.rs /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/duration.rs /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/helpers.rs /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/instant.rs /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/rate.rs
+
+/home/bogdandev/IdeaProjects/rpi_pico_hal_learning/target/thumbv6m-none-eabi/debug/deps/libfugit-e20a17597b89fbfe.rlib: /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/lib.rs /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/aliases.rs /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/duration.rs /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/helpers.rs /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/instant.rs /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/rate.rs
+
+/home/bogdandev/IdeaProjects/rpi_pico_hal_learning/target/thumbv6m-none-eabi/debug/deps/fugit-e20a17597b89fbfe.d: /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/lib.rs /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/aliases.rs /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/duration.rs /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/helpers.rs /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/instant.rs /home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/rate.rs
+
+/home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/lib.rs:
+/home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/aliases.rs:
+/home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/duration.rs:
+/home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/helpers.rs:
+/home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/instant.rs:
+/home/bogdandev/.cargo/registry/src/github.com-1ecc6299db9ec823/fugit-0.3.6/src/rate.rs:
