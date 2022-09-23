@@ -1,5 +1,12 @@
 #![no_std]
 #![no_main]
+#![deny(unsafe_code)]
+#![allow(unused)]
+
+mod servo;
+
+// for writing
+use core::fmt::Write;
 
 use cortex_m::prelude::*;
 // Traits for converting integers to amounts of time
@@ -15,11 +22,6 @@ use rp_pico::hal;
 // A shorter alias for the Peripheral Access Crate, which provides low-level
 // register access
 use rp_pico::hal::pac;
-
-
-// Some traits we need
-use core::fmt::Write;
-
 
 #[rp2040_hal::entry]
 fn main() -> ! {
@@ -41,8 +43,8 @@ fn main() -> ! {
         &mut pac.RESETS,
         &mut watchdog,
     )
-        .ok()
-        .unwrap();
+    .ok()
+    .unwrap();
 
     // Configure the Timer peripheral in count-down mode
     let timer = hal::Timer::new(pac.TIMER, &mut pac.RESETS);
@@ -59,7 +61,6 @@ fn main() -> ! {
         &mut pac.RESETS,
     );
 
-
     // UART TX (characters sent from pico) on pin 1 (GPIO0) and RX (on pin 2 (GPIO1)
     let uart_pins = (
         pins.gpio0.into_mode::<hal::gpio::FunctionUart>(),
@@ -74,10 +75,8 @@ fn main() -> ! {
         )
         .unwrap();
 
-
     // Init PWMs
     let mut pwm_slices = hal::pwm::Slices::new(pac.PWM, &mut pac.RESETS);
-
 
     let pwm = &mut pwm_slices.pwm1;
     pwm.set_ph_correct();
@@ -88,42 +87,40 @@ fn main() -> ! {
     let channel = &mut pwm.channel_b;
     channel.output_to(pins.gpio3);
 
-
     let mut delay = |ms: u32| {
         count_down.start(ms.millis());
         let _ = block!(count_down.wait());
     };
 
     let delay_time = 500u32;
-
-
     // Enable ADC
     let mut adc = hal::Adc::new(pac.ADC, &mut pac.RESETS);
 
     // Configure GPIO26 as an ADC input
     let mut adc_pin_0 = pins.gpio26.into_floating_input();
 
-
-    // Infinite loop, moving micro servo from one position to another.
-    // You may need to adjust the pulse width since several servos from
-    // different manufacturers respond differently.
     loop {
-        // move to 0°
-        channel.set_duty(2500);
+        channel.set_duty(8200);
         delay(delay_time);
+        channel.set_duty(1640);
+        delay(delay_time);
+        /*
+         // move to 0°
+         channel.set_duty(2500);
+         delay(delay_time);
         // 0° to 90°
-        channel.set_duty(3930);
-        let pin_adc_counts: u16 = adc.read(&mut adc_pin_0).unwrap();
-        writeln!(uart, "value: {:02}\r", pin_adc_counts).unwrap();
-        delay(delay_time);
+         channel.set_duty(3930);
+         let pin_adc_counts: u16 = adc.read(&mut adc_pin_0).unwrap();
+         writeln!(uart, "value: {:02}\r", pin_adc_counts).unwrap();
+         delay(delay_time);
 
-        // 90° to 180°
-        channel.set_duty(7860);
-        delay(delay_time);
+         // 90° to 180°
+         channel.set_duty(7860);
+         delay(delay_time);
 
-        // 180° to 90°
-        channel.set_duty(3930);
-        delay(delay_time);
+         // 180° to 90°
+         channel.set_duty(3930);
+         delay(delay_time);
+              */
     }
 }
-
