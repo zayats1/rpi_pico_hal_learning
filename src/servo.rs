@@ -11,9 +11,10 @@ pub struct Servo<'a> {
 impl<'a> Servo<'a> {
     pub fn new(pin: &'a mut dyn PwmPin<Duty = u16>, duty_on_zero: u16) -> Self {
         let duty_on_90 = duty_on_zero * 3;
+        let duty = duty_on_zero;
         let duty_per_degree = (duty_on_90 - duty_on_zero) / 90;
         Self {
-            pin:(pin),
+            pin: (pin),
             duty_on_zero,
             duty_on_90,
             duty_per_degree,

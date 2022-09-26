@@ -3,8 +3,6 @@
 #![deny(unsafe_code)]
 #![allow(unused)]
 
-mod servo;
-
 // for writing
 use core::fmt::Write;
 
@@ -19,9 +17,15 @@ use rp2040_hal::Clock;
 // A shorter alias for the Hardware Abstraction Layer, which provides
 // higher-level drivers.
 use rp_pico::hal;
+use rp_pico::hal::pac;
+
 // A shorter alias for the Peripheral Access Crate, which provides low-level
 // register access
-use rp_pico::hal::pac;
+use crate::servo::Servo;
+
+mod servo;
+
+const DELAY_TIME: u32 = 4;
 
 #[rp2040_hal::entry]
 fn main() -> ! {
@@ -92,35 +96,22 @@ fn main() -> ! {
         let _ = block!(count_down.wait());
     };
 
-    let delay_time = 500u32;
-    // Enable ADC
+    // todo calculate duty_on_zero(depending on period)
+    let mut my_servo = Servo::new(channel, 1620);
+    // Enable ADC1
     let mut adc = hal::Adc::new(pac.ADC, &mut pac.RESETS);
 
     // Configure GPIO26 as an ADC input
     let mut adc_pin_0 = pins.gpio26.into_floating_input();
 
     loop {
-        channel.set_duty(8200);
-        delay(delay_time);
-        channel.set_duty(1640);
-        delay(delay_time);
-        /*
-         // move to 0°
-         channel.set_duty(2500);
-         delay(delay_time);
-        // 0° to 90°
-         channel.set_duty(3930);
-         let pin_adc_counts: u16 = adc.read(&mut adc_pin_0).unwrap();
-         writeln!(uart, "value: {:02}\r", pin_adc_counts).unwrap();
-         delay(delay_time);
-
-         // 90° to 180°
-         channel.set_duty(7860);
-         delay(delay_time);
-
-         // 180° to 90°
-         channel.set_duty(3930);
-         delay(delay_time);
-              */
+        for deg in 0..180 {
+            my_servo.set_angle(deg);
+            delay(DELAY_TIME);
+        }
+        for deg in (0..180).rev() {
+            my_servo.set_angle(deg);
+            delay(DELAY_TIME);
+        }
     }
 }
