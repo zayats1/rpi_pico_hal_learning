@@ -16,6 +16,7 @@ use panic_halt as _;
 use rp2040_hal::Clock;
 // A shorter alias for the Hardware Abstraction Layer, which provides
 // higher-level drivers.
+use crate::scale::scale;
 use rp_pico::hal;
 use rp_pico::hal::pac;
 
@@ -23,6 +24,7 @@ use rp_pico::hal::pac;
 // register access
 use crate::servo::Servo;
 
+mod scale;
 mod servo;
 
 const DELAY_TIME: u32 = 4;
@@ -97,7 +99,7 @@ fn main() -> ! {
     };
 
     // todo calculate duty_on_zero(depending on period)
-    let mut my_servo = Servo::new(channel, 1620);
+    let mut my_servo = Servo::new(channel, 1640);
     // Enable ADC1
     let mut adc = hal::Adc::new(pac.ADC, &mut pac.RESETS);
 
@@ -105,13 +107,8 @@ fn main() -> ! {
     let mut adc_pin_0 = pins.gpio26.into_floating_input();
 
     loop {
-        for deg in 0..180 {
-            my_servo.set_angle(deg);
-            delay(DELAY_TIME);
-        }
-        for deg in (0..180).rev() {
-            my_servo.set_angle(deg);
-            delay(DELAY_TIME);
-        }
+        let angle = scale(adc.read(&mut adc_pin_0).unwrap(), 0, 4095, 0, 180);
+        my_servo.set_angle(angle as u16);
+        writeln!(&mut uart, "{}", angle).unwrap();
     }
 }
